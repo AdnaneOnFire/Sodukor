@@ -9,31 +9,23 @@ namespace SoduBreaker
     public class Soduko
     {
 
-        int[,] matrix;
-        int[,] invertedMatrix;
-        int size;
-        int grid;
-        int cellesNumber;
-        int[] rowBuffer;
-        int[] range;
-
-        public int[,] Matrix { get => matrix; set => matrix = value; }
-        public int Size { get => size; set => size = value; }
-        public int Grid { get => grid; set => grid = value; }
-        public int CellesNumber { get => cellesNumber; set => cellesNumber = value; }
-        public int[] RowBuffer { get => rowBuffer; set => rowBuffer = value; }
-        public int[,] InvertedMatrix { get => invertedMatrix; set => invertedMatrix = value; }
-        public int[] Range { get => range; set => range = value; }
+        public int[,] Matrix { get; set; }
+        public int Size { get; set; }
+        public int Grid { get; set; }
+        public int CellesNumber { get; set; }
+        public int[] RowBuffer { get; set; }
+        public int[,] InvertedMatrix { get; set; }
+        public int[] Range { get; set; }
 
         public Soduko(int[,] soduko)
         {
-            matrix = soduko;
-            invertedMatrix = Helper.InvertMtx(soduko);
-            cellesNumber = Matrix.Length;
-            size = (int)Math.Sqrt(cellesNumber);
-            grid = (int)Math.Sqrt(Size);
-            rowBuffer = new int[Size];
-            range = Enumerable.Range(1, size).ToArray();
+            Matrix = soduko;
+            InvertedMatrix = Helper.InvertMtx(soduko);
+            CellesNumber = Matrix.Length;
+            Size = (int)Math.Sqrt(CellesNumber);
+            Grid = (int)Math.Sqrt(Size);
+            RowBuffer = new int[Size];
+            Range = Enumerable.Range(1, Size).ToArray();
         }
 
 

@@ -21,9 +21,12 @@ namespace SoduBreaker
             var sodukoS = new Soduko(solution);
 
             Console.WriteLine(string.Format("Soduko : \n{0} solution evaluation is {1}", sodukoP.Matrix.PrettyPrint(), Evaluator.Success(sodukoP)));
-            Console.WriteLine(string.Format("Soduko Solution Space is: \n{0}", sodukoP.SolutionSpace()));
+            Console.WriteLine(string.Format("Soduko Solution Space is: \n{0}", sodukoP.SolutionSpaceString()));
+            Console.WriteLine(string.Format("Soduko Reduced Solution Space is: \n{0}", sodukoS.Reduce().PrettyPrint()));
+
             Console.WriteLine(string.Format("Soduko : \n{0} solution evaluation is {1}", sodukoS.Matrix.PrettyPrint(), Evaluator.Success(sodukoS)));
-            Console.WriteLine(string.Format("Soduko Solution Space is: \n{0}", sodukoS.SolutionSpace()));
+            Console.WriteLine(string.Format("Soduko Solution Space is: \n{0}", sodukoS.SolutionSpaceString()));
+            Console.WriteLine(string.Format("Soduko Reduced Solution Space is: \n{0}", sodukoS.Reduce().PrettyPrint()));
 
             Console.Read();
         }

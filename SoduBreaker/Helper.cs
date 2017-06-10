@@ -85,9 +85,9 @@ namespace SoduBreaker
             return z;
         }
 
-        public static string SolutionSpace(this Soduko soduko)
+        public static string SolutionSpaceString(this Soduko soduko)
         {
-            return soduko.GetSoltionSpace().PrettyPrint();
+            return soduko.SoltionSpace().PrettyPrint();
         }
     }
 }
