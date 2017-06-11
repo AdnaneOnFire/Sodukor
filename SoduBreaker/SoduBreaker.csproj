@@ -34,6 +34,9 @@
     <CodeAnalysisRuleSet>SoduBreaker.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\ThirdParties\NUnit.Framework-3.7.1\bin\net-4.5\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluator.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ProblemGenerator.cs" />
     <Compile Include="Program.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Soduko.cs" />
     <Compile Include="SodukoNode.cs" />
     <Compile Include="Solver.cs" />
+    <Compile Include="Tests\SolverTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

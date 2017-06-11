@@ -16,6 +16,11 @@ namespace SoduBreaker
             }
         }
 
+        public static string PrettyPrint(this Soduko soduko)
+        {
+            return soduko.Matrix.PrettyPrint();
+        }
+
         public static string PrettyPrint (this int[,] matrix)
         {
             var s = (int) Math.Sqrt(matrix.Length);
@@ -87,7 +92,7 @@ namespace SoduBreaker
 
         public static string SolutionSpaceString(this Soduko soduko)
         {
-            return soduko.SoltionSpace().PrettyPrint();
+            return soduko.SolutionSpace().PrettyPrint();
         }
     }
 }
