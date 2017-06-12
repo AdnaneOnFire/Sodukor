@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SoduBreaker
 {
@@ -65,7 +63,7 @@ namespace SoduBreaker
             return sb.ToString();
         }
 
-        public static int[,] InvertMtx(int[,] matrix)
+        public static int[,] InvertMtx(this int[,] matrix)
         {
             var l = (int)Math.Sqrt(matrix.Length);
 

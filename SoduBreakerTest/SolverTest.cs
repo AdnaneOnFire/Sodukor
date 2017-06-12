@@ -1,9 +1,10 @@
 ﻿
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace SoduBreaker.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SolverTest 
     {
 
@@ -11,7 +12,7 @@ namespace SoduBreaker.Tests
         Soduko soduko;
 
 
-        [SetUp]
+        [TestInitialize]
         public void Setup()
         {
             int[,] pb;
@@ -20,11 +21,11 @@ namespace SoduBreaker.Tests
             soduko = new Soduko(pb);
         }
 
-        [Test]
+        [TestMethod]
         public void ChooseNodeTest()
         {
             var choosed = soduko.ChooseNode();
-            Assert.True(soduko.SolutionSpace(choosed.Item1, choosed.Item2).Length > 1);
+            Assert.IsTrue(soduko[choosed.Item1, choosed.Item2] == 0);
         }
 
     }

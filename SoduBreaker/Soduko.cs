@@ -1,27 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ISoduBreaker;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoduBreaker
 {
-    public class Soduko
+    public class Soduko : ISoduko
     {
-        public enum State
-        {
-            Success,
-            Failure,
-            Unkown
-        }
 
-        public int[,] Matrix { get; set; }
-        public int Size { get; set; }
-        public int Grid { get; set; }
-        public int CellesNumber { get; set; }
-        public int[] RowBuffer { get; set; }
-        public int[,] InvertedMatrix { get; set; }
-        public int[] Range { get; set; }
+
+        private int[,] matrix;
+        private int[,] invertedMatrix;
+        private int[] RowBuffer { get; }
+
+        public int[,] Matrix
+        {
+            get { return matrix; }
+            set
+            {
+                if (matrix != value)
+                {
+                    matrix = value;
+                    invertedMatrix = matrix.InvertMtx();
+                }
+            }
+        }
+        public int[,] InvertedMatrix
+        {
+            get { return invertedMatrix; }
+            set
+            {
+                if (invertedMatrix != value)
+                {
+                    invertedMatrix = value;
+                    matrix = invertedMatrix.InvertMtx();
+                }
+            }
+        }
+        public int Size { get; }
+        public int Grid { get; }
+        public int CellesNumber { get; }
+        public int[] Range { get; }
 
         public Soduko(int[,] soduko)
         {
@@ -47,21 +65,21 @@ namespace SoduBreaker
 
         public int[] Row(int y)
         {
-            return InvertedMatrix.Line(y,Size);
+            return InvertedMatrix.Line(y, Size);
         }
 
-        public State Evaluate()
+        public EnumHelper.State Evaluate()
         {
             var filled = IsSodukoFilled();
             var valid = AreLinesValid() && AreRowsValid();
             if (!valid)
-                return State.Failure;
+                return EnumHelper.State.Failure;
             if (!filled)
-                return State.Unkown;
-            return State.Success;
+                return EnumHelper.State.Unkown;
+            return EnumHelper.State.Success;
         }
 
-        public  bool AreLinesValid()
+        public bool AreLinesValid()
         {
             return AreLinesValid(Matrix, Size, RowBuffer);
         }
@@ -89,7 +107,7 @@ namespace SoduBreaker
             {
                 Buffer.BlockCopy(matrix, i * s * 4, row, 0, s * 4);
                 var all = row.Where(x => x != 0).ToArray();
-                var distinct = all.Distinct();              
+                var distinct = all.Distinct();
                 if (distinct.Count() != all.Length)
                     return false;
             }

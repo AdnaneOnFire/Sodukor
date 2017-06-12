@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISoduBreaker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -101,9 +102,9 @@ namespace SoduBreaker
             node.TryNextValue();
             node.Simplify();
             var eval = node.Evaluate();
-            if (eval == Soduko.State.Success)
+            if (eval == EnumHelper.State.Success)
                 return node;
-            if (eval == Soduko.State.Failure)
+            if (eval == EnumHelper.State.Failure)
             {
                 if (node.IsCompletlyExplored)
                 {
@@ -127,7 +128,7 @@ namespace SoduBreaker
         {
             var history = new LinkedList<SodukoNode>();
             problem.Simplify();
-            if (problem.Evaluate() == Soduko.State.Success)
+            if (problem.Evaluate() == EnumHelper.State.Success)
                 return problem;
             var coordinates = ChooseNode(problem);
             var node = new SodukoNode(problem.Matrix, coordinates.Item1, coordinates.Item2);

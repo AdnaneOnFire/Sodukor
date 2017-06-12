@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85AD724F-5BD2-4548-A839-5DD61AF248C2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>SoduBreaker</RootNamespace>
-    <AssemblyName>SoduBreaker</AssemblyName>
+    <ProjectGuid>{6FE371E1-B236-4FD6-BD36-A771E0A8827C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InsoduHelper</RootNamespace>
+    <AssemblyName>InsoduHelper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,25 +20,18 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>SoduBreaker.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>SoduBreaker.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\ThirdParties\NUnit.Framework-3.7.1\bin\net-4.5\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,23 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper.cs" />
-    <Compile Include="ProblemGenerator.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="ISoduko.cs" />
+    <Compile Include="ISodukoNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Soduko.cs" />
-    <Compile Include="SodukoNode.cs" />
-    <Compile Include="Solver.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="SoduBreaker.ruleset" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\InsoduHelper\ISoduBreaker.csproj">
-      <Project>{6fe371e1-b236-4fd6-bd36-a771e0a8827c}</Project>
-      <Name>ISoduBreaker</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ISoduBreaker;
 
 namespace SoduBreaker
 {
-    public class SodukoNode : Soduko
+    public class SodukoNode : Soduko , ISodukoNode
     {
         public int X { get; protected set; }
         public int Y { get; protected set; }
