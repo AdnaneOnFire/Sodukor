@@ -87,12 +87,12 @@ namespace SoduBreaker
             //If ok return solution
             //if incomplete explore childe node
             //if nok explore parent node with new value
-            if (history.Count > 50)
+            if (history.Count > 89)
             {
                 throw new Exception("No fking way");
             }
             var node = history.Last();
-            Console.WriteLine(string.Format("Node  ({0},{1}) is completly explored ? : {2} \n{3}", node.X, node.Y, node.IsCompletlyExplored, node.PrettyPrint()));
+            //Console.WriteLine(string.Format("Node  ({0},{1}) is completly explored ? : {2} \n{3}", node.X, node.Y, node.IsCompletlyExplored, node.PrettyPrint()));
 
             if (node.IsCompletlyExplored)
             {
@@ -100,7 +100,7 @@ namespace SoduBreaker
                 return Explore(history);
             }
             node.TryNextValue();
-            node.Simplify();
+            //node.Simplify();
             var eval = node.Evaluate();
             if (eval == EnumHelper.State.Success)
                 return node;
@@ -127,12 +127,11 @@ namespace SoduBreaker
         public static Soduko Solve(this Soduko problem)
         {
             var history = new LinkedList<SodukoNode>();
-            problem.Simplify();
             if (problem.Evaluate() == EnumHelper.State.Success)
                 return problem;
             var coordinates = ChooseNode(problem);
             var node = new SodukoNode(problem.Matrix, coordinates.Item1, coordinates.Item2);
-            history.AddFirst(node);
+            history.AddLast(node);
             return Explore(history);
         }
 

@@ -43,8 +43,8 @@ namespace SoduBreaker
 
         public Soduko(int[,] soduko)
         {
-            Matrix = soduko;
-            InvertedMatrix = Helper.InvertMtx(soduko);
+            matrix = soduko;
+            invertedMatrix = Helper.InvertMtx(soduko);
             CellesNumber = Matrix.Length;
             Size = (int)Math.Sqrt(CellesNumber);
             Grid = (int)Math.Sqrt(Size);
