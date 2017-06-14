@@ -41,6 +41,10 @@ namespace SoduBreaker
         public int CellesNumber { get; }
         public int[] Range { get; }
 
+        public Soduko(Soduko s) : this (s.matrix)
+        {
+        }
+
         public Soduko(int[,] soduko)
         {
             matrix = soduko;
@@ -97,6 +101,11 @@ namespace SoduBreaker
                     return false;
             }
             return true;
+        }
+
+        public int[,] ProblemSet()
+        {
+            return matrix;
         }
 
         #region private methods

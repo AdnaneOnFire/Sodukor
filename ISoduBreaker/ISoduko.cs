@@ -5,6 +5,7 @@ namespace ISoduBreaker
     {
         int[] Line(int x);
         int[] Row(int y);
+        int[,] ProblemSet();
         bool AreLinesValid();
         bool AreRowsValid();
         bool IsSodukoFilled();

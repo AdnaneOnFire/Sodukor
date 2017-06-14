@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SoduBreaker
 {
-    public static class Solver
+    public static class NaiveSolverHelper
     {
 
         public delegate int[,] Del(int[,][] t);
@@ -35,7 +35,7 @@ namespace SoduBreaker
         }
 
 
-        public static void Solve(Soduko problem, int depth)
+        public static void SimpleSolve(Soduko problem, int depth)
         {
             var tmpSolution = new Soduko(problem.Matrix);
             var solSpace = tmpSolution.SolutionSpace();
@@ -77,7 +77,7 @@ namespace SoduBreaker
             return simplified;
         }
 
-        public static Soduko Explore(LinkedList<SodukoNode> history)
+        public static Soduko Explore(LinkedList<SodukoNode> history, ref string depth)
         {
             //simplify
             //If ok return solution
@@ -87,6 +87,8 @@ namespace SoduBreaker
             //If ok return solution
             //if incomplete explore childe node
             //if nok explore parent node with new value
+            depth += history.Count + ",";
+
             if (history.Count > 89)
             {
                 throw new Exception("No fking way");
@@ -97,7 +99,7 @@ namespace SoduBreaker
             if (node.IsCompletlyExplored)
             {
                 history.RemoveLast();
-                return Explore(history);
+                return Explore(history, ref depth);
             }
             node.TryNextValue();
             //node.Simplify();
@@ -109,38 +111,45 @@ namespace SoduBreaker
                 if (node.IsCompletlyExplored)
                 {
                     history.RemoveLast();
-                    return Explore(history);
+                    return Explore(history, ref depth);
                 }
-                return Explore(history);
+                return Explore(history, ref depth);
             }
             //Eval = Unkown
-            if (node.IsCompletlyExplored)
+            //if (node.IsCompletlyExplored)
+            //{
+            var coordinates = ChooseNode(node);
+            if (coordinates != null)
             {
-                var coordinates = ChooseNode(node);
                 var newNode = new SodukoNode(node.Matrix, coordinates.Item1, coordinates.Item2);
                 history.AddLast(newNode);
-                return Explore(history);
+                return Explore(history, ref depth);
             }
-            return Explore(history);
+            //}
+            return Explore(history, ref depth);
         }
 
-        public static Soduko Solve(this Soduko problem)
+        public static Soduko Solve(Soduko p, ref string depth)
         {
+
+            var problem = new Soduko(p);
             var history = new LinkedList<SodukoNode>();
             if (problem.Evaluate() == EnumHelper.State.Success)
                 return problem;
             var coordinates = ChooseNode(problem);
             var node = new SodukoNode(problem.Matrix, coordinates.Item1, coordinates.Item2);
             history.AddLast(node);
-            return Explore(history);
+
+            return Explore(history, ref depth);
         }
 
         public static Tuple<int, int> ChooseNode(this Soduko soduko)
         {
             var solutionSpace = soduko.SolutionSpace();
             var sorted = solutionSpace.InvertByLength();
+            var inconsistent = sorted[0];
             sorted[0] = new List<Tuple<int, int>>();
-            var s1 = new List<Tuple<int,int>>();
+            var s1 = new List<Tuple<int, int>>();
             if (sorted[1] != null)
             {
                 foreach (var elm in sorted[1])
@@ -150,7 +159,8 @@ namespace SoduBreaker
                 }
             }
             sorted[1] = s1;
-            return sorted.First(x => x.Count > 0)[0];
+            var candidates = sorted.FirstOrDefault(x => x.Count > 0);
+            return candidates == null ? null : candidates[0];
         }
 
         public static List<Tuple<int, int>>[] InvertByLength(this int[,][] tab)

@@ -10,7 +10,7 @@ namespace SoduBreaker
         public int X { get; protected set; }
         public int Y { get; protected set; }
 
-        public int CurrentValue { get; set; }
+        public int CurrentValue { get; private set; }
         public List<int> ExploredValues { get; }
         public int[] PossibleValues { get; }
 

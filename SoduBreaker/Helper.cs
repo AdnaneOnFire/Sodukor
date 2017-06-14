@@ -19,13 +19,13 @@ namespace SoduBreaker
             return soduko.Matrix.PrettyPrint();
         }
 
-        public static string PrettyPrint (this int[,] matrix)
+        public static string PrettyPrint(this int[,] matrix)
         {
-            var s = (int) Math.Sqrt(matrix.Length);
-            StringBuilder str  =  new StringBuilder();
+            var s = (int)Math.Sqrt(matrix.Length);
+            StringBuilder str = new StringBuilder();
             for (int i = 0; i < s; i++)
             {
-                for (int j=0; j<s; j++)
+                for (int j = 0; j < s; j++)
                 {
                     str.Append(matrix[i, j]);
                 }
@@ -43,7 +43,7 @@ namespace SoduBreaker
                 {
                     for (int j = 0; j < s; j++)
                     {
-                        sb.Append(matrix[i, j].PrettyPrint(s+1));
+                        sb.Append(matrix[i, j].PrettyPrint(s + 1));
                     }
                     sb.AppendLine();
                 }
@@ -59,7 +59,7 @@ namespace SoduBreaker
                 sb.Append(elm);
                 fill--;
             }
-            sb.Append(' ',fill);
+            sb.Append(' ', fill);
             return sb.ToString();
         }
 
@@ -91,6 +91,21 @@ namespace SoduBreaker
         public static string SolutionSpaceString(this Soduko soduko)
         {
             return soduko.SolutionSpace().PrettyPrint();
+        }
+
+        public static bool AssertEqual(this int[,] m, int[,] m2)
+        {
+            var l = m.Length;
+            var l2 = m2.Length;
+            if (l != l2)
+            { return false; }
+            for (int i =0; i<l; i++)
+                for(int j = 0; j<l; j++)
+                {
+                    if (m[i, j] != m2[i, j])
+                        return false;
+                }
+            return true;
         }
     }
 }

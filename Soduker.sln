@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoduBreaker", "SoduBreaker\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoduBreakerTest", "SoduBreakerTest\SoduBreakerTest.csproj", "{54132945-805B-404F-B97C-0BADB8286232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISoduBreaker", "InsoduHelper\ISoduBreaker.csproj", "{6FE371E1-B236-4FD6-BD36-A771E0A8827C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISoduBreaker", "ISoduBreaker\ISoduBreaker.csproj", "{6FE371E1-B236-4FD6-BD36-A771E0A8827C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

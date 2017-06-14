@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SoduBreaker
 {
@@ -14,16 +16,29 @@ namespace SoduBreaker
             return int.Parse(s.ToString());
         }
 
-        //..2....74..8......6.3...12....8.1..3.....7.697...6921...6....3.8.41.........23...,912635874458712396673984125269851743381247569745369218126598437834176952597423681,
+        public static List<Tuple<int[,], int[,]>> GetProblems(string path)
+        {
+            var pbs = new List<Tuple<int[,], int[,]>>();
+            var lines = File.ReadAllLines(path);
+            int[,] pb;
+            int[,] sol;
+            foreach (var line in lines)
+            {
+                GetProblem(line, out pb, out sol);
+                pbs.Add(new Tuple<int[,], int[,]>(pb, sol));
+            }
+            return pbs;
+        }
+
         public static void GetProblem(string source, out int[,] problem, out int[,] solution)
         {
             var pb_sl = source.Split(',');
             var pb = pb_sl[0];
             var sl = pb_sl[1];
-            var l = (int) Math.Sqrt(pb.Length);
+            var l = (int)Math.Sqrt(pb.Length);
             problem = new int[l, l];
             solution = new int[l, l];
-            for (int i=0; i<pb.Length; i++)
+            for (int i = 0; i < pb.Length; i++)
             {
                 problem[i / l, i % l] = Convert(pb[i]);
             }
@@ -32,5 +47,6 @@ namespace SoduBreaker
                 solution[i / l, i % l] = Convert(sl[i]);
             }
         }
+
     }
 }

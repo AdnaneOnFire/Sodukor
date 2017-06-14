@@ -6,9 +6,9 @@ namespace ISoduBreaker
 
         public enum State
         {
-            Success,
-            Failure,
-            Unkown
+            Success = 0, 
+            Failure = 1,
+            Unkown = 2
         }
     }
 }
