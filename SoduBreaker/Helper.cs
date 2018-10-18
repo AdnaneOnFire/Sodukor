@@ -99,13 +99,28 @@ namespace SoduBreaker
             var l2 = m2.Length;
             if (l != l2)
             { return false; }
-            for (int i =0; i<l; i++)
-                for(int j = 0; j<l; j++)
+            for (int i = 0; i < l; i++)
+                for (int j = 0; j < l; j++)
                 {
                     if (m[i, j] != m2[i, j])
                         return false;
                 }
             return true;
         }
+
+
+        //public static bool CompareForDebug(this int[,] m, int s, string solution)
+        //{
+        //    var sb = new StringBuilder();
+        //    for (int i = 0; i < s; i++)
+        //    {
+        //        for (int j = 0; j < s; j++)
+        //        {
+        //            sb.Append(m[i, j]);
+        //        }
+        //    }
+        //    var str = sb.ToString();
+
+        //}
     }
 }

@@ -34,7 +34,6 @@ namespace SoduBreaker
             return solutionSpace;
         }
 
-
         public static void SimpleSolve(Soduko problem, int depth)
         {
             var tmpSolution = new Soduko(problem.Matrix);
@@ -87,8 +86,9 @@ namespace SoduBreaker
             //If ok return solution
             //if incomplete explore childe node
             //if nok explore parent node with new value
-            depth += history.Count + ",";
-
+            var x = history.Count != 0 ? history.Last().PossibleValues.Length : 0;
+            depth += history.Count +"-"+x+ ",";
+            history.Last().PrettyPrint();
             if (history.Count > 89)
             {
                 throw new Exception("No fking way");
@@ -110,7 +110,7 @@ namespace SoduBreaker
             {
                 if (node.IsCompletlyExplored)
                 {
-                    history.RemoveLast();
+                    //history.RemoveLast();
                     return Explore(history, ref depth);
                 }
                 return Explore(history, ref depth);
@@ -123,7 +123,11 @@ namespace SoduBreaker
             {
                 var newNode = new SodukoNode(node.Matrix, coordinates.Item1, coordinates.Item2);
                 history.AddLast(newNode);
-                return Explore(history, ref depth);
+
+            }
+            else if( coordinates == null)
+            {
+                //history.RemoveLast();
             }
             //}
             return Explore(history, ref depth);
@@ -147,7 +151,6 @@ namespace SoduBreaker
         {
             var solutionSpace = soduko.SolutionSpace();
             var sorted = solutionSpace.InvertByLength();
-            var inconsistent = sorted[0];
             sorted[0] = new List<Tuple<int, int>>();
             var s1 = new List<Tuple<int, int>>();
             if (sorted[1] != null)
